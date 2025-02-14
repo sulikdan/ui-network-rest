@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class DeviceServiceSimpleImpl implements DeviceService {
+public class DeviceServiceImpl implements DeviceService {
 
     DeviceRepository deviceRepository;
 

@@ -21,10 +21,10 @@ public class DeviceController {
 
     DeviceService deviceService;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Device createDevice(@RequestBody @NotNull Device device) {
+        log.info("Creating device {}", device);
         return deviceService.createDevice(device);
     }
 
@@ -32,16 +32,17 @@ public class DeviceController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     List<Device> getAllDevicesSortedByType() {
+        log.info("Getting all devices sorted by type");
         return deviceService.getAllDevicesSortedByType();
     }
 
 
-    @GetMapping
+    @GetMapping("/{macAddress}")
     @ResponseStatus(HttpStatus.OK)
     Device getDeviceByMacAddress(@PathVariable @NotBlank String macAddress) {
+        log.info("Getting device by mac address {}", macAddress);
         return deviceService.getDeviceByMacAddress(macAddress);
     }
-
 
 
 }

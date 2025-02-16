@@ -1,6 +1,6 @@
 package eu.sulikdan.networkbackend.services;
 
-import eu.sulikdan.networkbackend.entities.SimplifiedTopologyNode;
+import eu.sulikdan.networkbackend.entities.SimplifiedTreeNode;
 import eu.sulikdan.networkbackend.entities.TreeNode;
 import eu.sulikdan.networkbackend.repositories.DeviceRepository;
 import lombok.AccessLevel;
@@ -23,30 +23,32 @@ public class NetworkTreeServiceImpl implements NetworkTreeService {
     DeviceRepository deviceRepository;
 
     @Override
-    public List<TreeNode> getAllNetworkTrees() {
+    public List<TreeNode> findAllNetworkTrees() {
 
         List<TreeNode> foundTopologies = new ArrayList<>();
 
         // TODO possible parallel stream - if needed
-        deviceRepository.getAllDevicesByUplinkMacAddressIsNull().forEach(rootDevice -> {
-            List<SimplifiedTopologyNode> list = deviceRepository.findSimplifiedNodeTopologyFromRoot(rootDevice.getMacAddress());
-        });
+        deviceRepository.findAllByUplinkMacAddressIsNull()
+                .forEach(rootDevice -> foundTopologies.add(
+                        this.findTreeStartingByMacAddress(rootDevice.getMacAddress()
+                        )
+                ));
 
 
         return foundTopologies;
     }
 
     @Override
-    public TreeNode getTreeStartingByMacAddress(String macAddress) {
+    public TreeNode findTreeStartingByMacAddress(String macAddress) {
 
-        List<SimplifiedTopologyNode> simplifiedTopologyNodes = deviceRepository.findSimplifiedNodeTopologyFromRoot(macAddress);
+        List<SimplifiedTreeNode> simplifiedTreeNodes = deviceRepository.findSimplifiedNodeTopologyFromRoot(macAddress);
 
-        return convertToTopologyNode(simplifiedTopologyNodes, macAddress);
+        return convertToTreeNode(simplifiedTreeNodes, macAddress);
 
     }
 
 
-    private TreeNode convertToTopologyNode(List<SimplifiedTopologyNode> list, String rootMacAddress) {
+    private TreeNode convertToTreeNode(List<SimplifiedTreeNode> list, String rootMacAddress) {
         Map<String, TreeNode> nodeMap = new HashMap<>();
 
         list.forEach(simpleNode -> {

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface NetworkTreeService {
 
-    List<TreeNode> getAllNetworkTrees();
+    List<TreeNode> findAllNetworkTrees();
 
-    TreeNode getTreeStartingByMacAddress(String macAddress);
+    TreeNode findTreeStartingByMacAddress(String macAddress);
 
 }

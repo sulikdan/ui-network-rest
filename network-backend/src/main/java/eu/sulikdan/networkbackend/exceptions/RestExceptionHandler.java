@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class DeviceExceptionHandler {
+public class RestExceptionHandler {
 
     @ExceptionHandler(DeviceException.class)
     public ProblemDetail handleDeviceException(DeviceException e) {

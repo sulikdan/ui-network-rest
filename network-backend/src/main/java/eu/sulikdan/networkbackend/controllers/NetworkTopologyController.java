@@ -1,7 +1,6 @@
 package eu.sulikdan.networkbackend.controllers;
 
 import eu.sulikdan.networkbackend.entities.TreeNode;
-import eu.sulikdan.networkbackend.repositories.DeviceRepository;
 import eu.sulikdan.networkbackend.services.NetworkTreeService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
@@ -23,19 +22,20 @@ import java.util.List;
 public class NetworkTopologyController {
 
     NetworkTreeService networkTreeService;
-    DeviceRepository deviceRepository;
+
+
 
     @GetMapping("/{macAddress}")
     TreeNode findTopologyNode(@PathVariable @NotBlank String macAddress) {
         log.info("Getting topologies from root mac address {}", macAddress);
         // TODO verify that macAddress is correct
-        return networkTreeService.getTreeStartingByMacAddress(macAddress);
+        return networkTreeService.findTreeStartingByMacAddress(macAddress);
     }
 
     @GetMapping
     List<TreeNode> findAllTopologyNodes() {
         log.info("Getting all topologies from root");
-        return null;
+        return networkTreeService.findAllNetworkTrees();
     }
 
 

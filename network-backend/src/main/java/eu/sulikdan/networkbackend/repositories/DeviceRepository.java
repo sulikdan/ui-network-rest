@@ -1,7 +1,7 @@
 package eu.sulikdan.networkbackend.repositories;
 
 import eu.sulikdan.networkbackend.entities.Device;
-import eu.sulikdan.networkbackend.entities.SimplifiedTopologyNode;
+import eu.sulikdan.networkbackend.entities.SimplifiedTreeNode;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,22 +12,19 @@ public interface DeviceRepository extends CrudRepository<Device, String> {
 
     boolean existsDeviceByMacAddress(@NotNull String macAddress);
 
-    List<Device> findAllDevicesByOrderByDeviceTypeAsc();
+    List<Device> findAllByOrderByDeviceTypeAsc();
 
     /**
      * Generate root list of deployment network
      *
      * @return list of root devices
      */
-    List<Device> getAllDevicesByUplinkMacAddressIsNull();
-
-    List<Device> findDeviceByMacAddress(@NotNull String macAddress);
-
+    List<Device> findAllByUplinkMacAddressIsNull();
 
     /**
      * Query method that gets whole tree of specified root-node
-     * @param rootMacAddress
-     * @return List of {@link SimplifiedTopologyNode} that contains self and link to parent
+     * @param rootMacAddress mac-address of root, from where it searches children
+     * @return List of {@link SimplifiedTreeNode} that contains self and link to parent
      */
     @Query(value = """
             WITH RECURSIVE topology_tree(mac_address, uplink_mac_address ) AS ( 
@@ -40,5 +37,5 @@ public interface DeviceRepository extends CrudRepository<Device, String> {
             FROM topology_tree
             """
             , nativeQuery = true)
-    List<SimplifiedTopologyNode> findSimplifiedNodeTopologyFromRoot(String rootMacAddress);
+    List<SimplifiedTreeNode> findSimplifiedNodeTopologyFromRoot(String rootMacAddress);
 }

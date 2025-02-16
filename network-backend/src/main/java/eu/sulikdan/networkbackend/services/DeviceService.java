@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DeviceService {
 
@@ -12,6 +13,6 @@ public interface DeviceService {
 
     List<Device> findAllDevicesSortedByType();
 
-    Device findDeviceByMacAddress(@NotBlank String macAddress);
+    Optional<Device> findById(@NotBlank String macAddress);
 
 }

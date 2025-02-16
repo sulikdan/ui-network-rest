@@ -41,7 +41,7 @@ public class NetworkTreeServiceImpl implements NetworkTreeService {
     @Override
     public TreeNode findTreeStartingByMacAddress(String macAddress) {
 
-        List<SimplifiedTreeNode> simplifiedTreeNodes = deviceRepository.findSimplifiedNodeTopologyFromRoot(macAddress);
+        List<SimplifiedTreeNode> simplifiedTreeNodes = deviceRepository.findSimplifiedNodeTreeFromRoot(macAddress);
 
         return convertToTreeNode(simplifiedTreeNodes, macAddress);
 

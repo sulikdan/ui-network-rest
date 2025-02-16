@@ -37,5 +37,5 @@ public interface DeviceRepository extends CrudRepository<Device, String> {
             FROM topology_tree
             """
             , nativeQuery = true)
-    List<SimplifiedTreeNode> findSimplifiedNodeTopologyFromRoot(String rootMacAddress);
+    List<SimplifiedTreeNode> findSimplifiedNodeTreeFromRoot(@NotNull String rootMacAddress);
 }

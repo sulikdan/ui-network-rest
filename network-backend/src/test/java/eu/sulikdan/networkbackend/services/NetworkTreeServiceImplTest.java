@@ -78,14 +78,14 @@ class NetworkTreeServiceImplTest {
     @Test
     void findTreeStartingByMacAddress() {
 
-        when(deviceRepository.findSimplifiedNodeTopologyFromRoot("1")).thenReturn(simplifiedTreeNodeList1);
+        when(deviceRepository.findSimplifiedNodeTreeFromRoot("1")).thenReturn(simplifiedTreeNodeList1);
 
 
         var result = networkTreeService.findTreeStartingByMacAddress(simplifiedTreeNode1.getMacAddress());
 
 
         assertNotNull(result);
-        verify(deviceRepository, times(1)).findSimplifiedNodeTopologyFromRoot(any());
+        verify(deviceRepository, times(1)).findSimplifiedNodeTreeFromRoot(any());
 
         assertEquals(aTreeNode1.getDeviceList().size(), result.getDeviceList().size());
         assertEquals(aTreeNode1.getMacAddress(), result.getMacAddress());
@@ -100,8 +100,8 @@ class NetworkTreeServiceImplTest {
         Device device11 = new Device("11", DeviceType.ACCESS_POINT, null);
 
         when(deviceRepository.findAllByUplinkMacAddressIsNull()).thenReturn(List.of(device1, device11));
-        when(deviceRepository.findSimplifiedNodeTopologyFromRoot("1")).thenReturn(simplifiedTreeNodeList1);
-        when(deviceRepository.findSimplifiedNodeTopologyFromRoot("11")).thenReturn(List.of(simplifiedTreeNode11));
+        when(deviceRepository.findSimplifiedNodeTreeFromRoot("1")).thenReturn(simplifiedTreeNodeList1);
+        when(deviceRepository.findSimplifiedNodeTreeFromRoot("11")).thenReturn(List.of(simplifiedTreeNode11));
 
 
         var result = networkTreeService.findAllNetworkTrees();
@@ -109,7 +109,7 @@ class NetworkTreeServiceImplTest {
 
         assertNotNull(result);
         verify(deviceRepository, times(1)).findAllByUplinkMacAddressIsNull();
-        verify(deviceRepository, times(2)).findSimplifiedNodeTopologyFromRoot(any());
+        verify(deviceRepository, times(2)).findSimplifiedNodeTreeFromRoot(any());
 
         assertEquals(2, result.size());
         assertEquals(aTreeNode1.getDeviceList().size(), result.getFirst().getDeviceList().size());

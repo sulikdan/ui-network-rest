@@ -2,6 +2,7 @@ package eu.sulikdan.networkbackend.controllers;
 
 import eu.sulikdan.networkbackend.exceptions.NetworkTreeException;
 import eu.sulikdan.networkbackend.services.DeviceService;
+import eu.sulikdan.networkbackend.services.NetworkTreeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -28,6 +29,11 @@ class NetworkTreeControllerTest {
 
     @MockitoBean
     DeviceService deviceService;
+
+    @MockitoBean
+    NetworkTreeService networkTreeService;
+
+
 
     @Test
     void findTreeNode() throws Exception {

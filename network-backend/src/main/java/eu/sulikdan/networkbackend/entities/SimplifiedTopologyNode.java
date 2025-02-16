@@ -5,17 +5,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Node {
+public class SimplifiedTopologyNode {
 
     @NotNull
     String macAddress;
-    List<Node> nodeList;
+
+    String uplinkMacAddress;
 
 }

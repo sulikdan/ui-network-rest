@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
-@Service
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Service
 public class DeviceServiceImpl implements DeviceService {
 
     DeviceRepository deviceRepository;
@@ -31,12 +31,13 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public List<Device> getAllDevicesSortedByType() {
-        return deviceRepository.getAllDevicesByOrderByDeviceTypeAsc();
+    public List<Device> findAllDevicesSortedByType() {
+        return deviceRepository.findAllDevicesByOrderByDeviceTypeAsc();
     }
 
     @Override
-    public Device getDeviceByMacAddress(@NotNull String macAddress) {
-        return deviceRepository.getDeviceByMacAddress(macAddress);
+    public Device findDeviceByMacAddress(@NotNull String macAddress) {
+        return deviceRepository.findById(macAddress)
+                .orElseThrow(() -> new DeviceException("Device with MacAddress " + macAddress + " not found"));
     }
 }

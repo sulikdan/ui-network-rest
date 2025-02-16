@@ -10,8 +10,8 @@ public interface DeviceService {
 
     Device createDevice(@NotNull Device device);
 
-    List<Device> getAllDevicesSortedByType();
+    List<Device> findAllDevicesSortedByType();
 
-    Device getDeviceByMacAddress(@NotBlank String macAddress);
+    Device findDeviceByMacAddress(@NotBlank String macAddress);
 
 }

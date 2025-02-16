@@ -2,15 +2,14 @@ package eu.sulikdan.networkbackend.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Device {
 
@@ -25,6 +24,5 @@ public class Device {
     @Enumerated(EnumType.ORDINAL)
     DeviceType deviceType;
 
-    @OneToOne
-    Device uplink;
+    String uplinkMacAddress;
 }

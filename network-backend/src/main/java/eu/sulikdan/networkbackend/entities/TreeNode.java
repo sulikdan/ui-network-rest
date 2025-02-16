@@ -2,7 +2,9 @@ package eu.sulikdan.networkbackend.entities;
 
 
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
@@ -15,14 +17,6 @@ public class TreeNode {
 
     @NotNull
     String macAddress;
-//
-//    // TODO delete not needed
-//    @NotNull
-//    @Enumerated(EnumType.ORDINAL)
-//    DeviceType deviceType;
-//
-//    // TODO delete not needed
-//    String uplink;
 
     List<TreeNode> deviceList;
 

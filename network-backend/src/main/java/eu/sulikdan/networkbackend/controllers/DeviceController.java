@@ -55,7 +55,7 @@ public class DeviceController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<DeviceDto> getAllDevicesSortedByType() {
+    List<DeviceDto> findAllDevicesSortedByType() {
         log.info("Getting all devices sorted by type");
         return deviceService.findAllDevicesSortedByType()
                 .stream()
@@ -66,7 +66,7 @@ public class DeviceController {
 
     @GetMapping("/{macAddress}")
     @ResponseStatus(HttpStatus.OK)
-    DeviceDto getDeviceByMacAddress(@PathVariable @NotBlank String macAddress) {
+    DeviceDto findDeviceByMacAddress(@PathVariable @NotBlank String macAddress) {
         log.info("Getting device by mac address {}", macAddress);
         Device foundDevice = deviceService.findById(macAddress)
                 .orElseThrow(() -> new DeviceException("Device with MacAddress " + macAddress + " not found"));
